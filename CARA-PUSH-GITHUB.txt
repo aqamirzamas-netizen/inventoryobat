@@ -1,0 +1,171 @@
+═══════════════════════════════════════════════════════════════════
+   CARA PUSH KE GITHUB - PANDUAN LENGKAP STEP BY STEP
+═══════════════════════════════════════════════════════════════════
+
+✅ Git sudah di-initialize!
+✅ Semua file sudah di-commit!
+✅ Branch sudah diset ke 'main'!
+
+Sekarang tinggal 3 langkah lagi:
+
+───────────────────────────────────────────────────────────────────
+STEP 1: BUAT REPOSITORY DI GITHUB
+───────────────────────────────────────────────────────────────────
+
+1. Buka browser, masuk ke: https://github.com/new
+
+2. Isi form:
+   - Repository name: inventoryobat (atau nama lain)
+   - Description: Sistem Manajemen Inventaris Apotek
+   - Public atau Private: Pilih sesuai keinginan
+   - ❌ JANGAN centang "Add a README file"
+   - ❌ JANGAN centang ".gitignore"
+   - ❌ JANGAN pilih license
+
+3. Klik tombol "Create repository"
+
+4. GitHub akan menampilkan halaman dengan instruksi.
+   COPY URL repository yang muncul, contoh:
+   https://github.com/username/inventoryobat.git
+
+   (Ganti 'username' dengan username GitHub Anda!)
+
+───────────────────────────────────────────────────────────────────
+STEP 2: LINK DAN PUSH KE GITHUB
+───────────────────────────────────────────────────────────────────
+
+Jalankan 2 command ini di terminal (satu per satu):
+
+# 1. Link ke repository GitHub (GANTI URL dengan milik Anda!)
+git remote add origin https://github.com/USERNAME/inventoryobat.git
+
+# 2. Push ke GitHub
+git push -u origin main
+
+
+CONTOH LENGKAP:
+--------------
+Jika username GitHub Anda: johndoe
+Maka command-nya:
+
+git remote add origin https://github.com/johndoe/inventoryobat.git
+git push -u origin main
+
+───────────────────────────────────────────────────────────────────
+STEP 3: SETUP GITHUB PAGES
+───────────────────────────────────────────────────────────────────
+
+Setelah push berhasil:
+
+1. Buka repository di GitHub
+2. Klik tab "Settings"
+3. Scroll ke bawah, klik "Pages" di sidebar kiri
+4. Di bagian "Source", pilih: "GitHub Actions"
+5. Save (otomatis)
+
+───────────────────────────────────────────────────────────────────
+STEP 4: SETUP SECRETS (ENVIRONMENT VARIABLES)
+───────────────────────────────────────────────────────────────────
+
+1. Di repository, klik "Settings" > "Secrets and variables" > "Actions"
+
+2. Klik "New repository secret"
+
+3. Tambahkan SECRET #1:
+   Name: VITE_SUPABASE_URL
+   Value: https://0ec90b57d6e95fcbda19832f.supabase.co
+   → Klik "Add secret"
+
+4. Klik "New repository secret" lagi
+
+5. Tambahkan SECRET #2:
+   Name: VITE_SUPABASE_ANON_KEY
+   Value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJib2x0IiwicmVmIjoiMGVjOTBiNTdkNmU5NWZjYmRhMTk4MzJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg4ODE1NzQsImV4cCI6MTc1ODg4MTU3NH0.9I8-U0x86Ak8t2DGaIk0HfvTSLsAyzdnz-Nw00mMkKw
+   → Klik "Add secret"
+
+───────────────────────────────────────────────────────────────────
+STEP 5: BUAT USER DI SUPABASE
+───────────────────────────────────────────────────────────────────
+
+1. Buka: https://supabase.com/dashboard
+2. Login ke Supabase
+3. Pilih project Anda
+4. Klik "Authentication" di sidebar
+5. Klik "Users"
+6. Klik "Add User" > "Create new user"
+7. Isi:
+   - Email: admin@apotek.com
+   - Password: aqafitriadokter
+   - ✓ CENTANG "Auto Confirm User"
+8. Klik "Create user"
+
+───────────────────────────────────────────────────────────────────
+STEP 6: AKSES APLIKASI
+───────────────────────────────────────────────────────────────────
+
+Setelah semua setup selesai:
+
+1. Tunggu 2-3 menit (GitHub Actions akan build & deploy otomatis)
+
+2. Check progress di tab "Actions" repository GitHub
+
+3. Setelah selesai (ada checkmark hijau), akses aplikasi di:
+
+   https://USERNAME.github.io/NAMA-REPO/
+
+   Contoh:
+   https://johndoe.github.io/inventoryobat/
+
+4. Login dengan:
+   Email: admin@apotek.com
+   Password: aqafitriadokter
+
+5. Sistem akan auto-load 135 obat!
+
+═══════════════════════════════════════════════════════════════════
+TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════════
+
+❌ ERROR: "remote origin already exists"
+   → Jalankan: git remote remove origin
+   → Lalu ulangi: git remote add origin URL_ANDA
+
+❌ ERROR: Permission denied
+   → Pastikan Anda sudah login ke GitHub
+   → Atau gunakan Personal Access Token
+
+❌ 404 Not Found setelah deploy
+   → Tunggu 2-3 menit lagi
+   → Pastikan Pages source = GitHub Actions
+   → Refresh browser
+
+❌ Build failed di Actions
+   → Check logs di tab Actions
+   → Pastikan secrets sudah benar
+
+❌ Tidak bisa login
+   → Pastikan user sudah dibuat di Supabase
+   → Check email dan password
+
+═══════════════════════════════════════════════════════════════════
+UPDATE APLIKASI DI MASA DEPAN
+═══════════════════════════════════════════════════════════════════
+
+Setiap kali ada perubahan code:
+
+git add .
+git commit -m "Deskripsi perubahan"
+git push
+
+GitHub Actions akan otomatis re-deploy!
+
+═══════════════════════════════════════════════════════════════════
+
+🎉 Selamat! Aplikasi Anda siap di-deploy ke GitHub Pages!
+
+Dokumentasi lengkap ada di:
+- README.md
+- QUICKSTART.md
+- DEPLOYMENT.md
+
+Good luck! 🚀
